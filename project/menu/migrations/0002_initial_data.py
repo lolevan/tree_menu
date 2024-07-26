@@ -1,4 +1,5 @@
-from django.db import migrations, models
+from django.db import migrations
+from django.contrib.auth.models import User
 
 
 def create_initial_data(apps, schema_editor):
@@ -16,6 +17,9 @@ def create_initial_data(apps, schema_editor):
     # Создаем подэлементы для Services
     web_development = MenuItem.objects.create(menu=main_menu, name='Web Development', url='/services/web-development', named_url='web_development', order=1, parent=services)
     seo = MenuItem.objects.create(menu=main_menu, name='SEO', url='/services/seo', named_url='seo', order=2, parent=services)
+
+    # Создаем суперпользователя
+    User.objects.create_superuser('admin', 'admin@example.com', 'admin')
 
 
 class Migration(migrations.Migration):
