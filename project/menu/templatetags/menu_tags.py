@@ -1,7 +1,7 @@
 from django import template
 from django.urls import resolve, Resolver404
 
-from ..models import Menu, MenuItem
+from ..models import Menu
 
 register = template.Library()
 
@@ -9,7 +9,7 @@ register = template.Library()
 @register.inclusion_tag('menu/draw_menu.html', takes_context=True)
 def draw_menu(context, menu_name):
     try:
-        menu = Menu.objects.get(name=menu_name)
+        menu = Menu.objects.with_items().get(name=menu_name)
     except Menu.DoesNotExist:
         return {'menu': None}
 
@@ -28,7 +28,7 @@ def draw_menu(context, menu_name):
                 })
         return tree
 
-    items = MenuItem.objects.filter(menu=menu).select_related('parent').order_by('order')
+    items = menu.items.all()
     menu_tree = build_tree(items)
 
     return {
