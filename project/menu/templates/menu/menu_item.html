@@ -1,10 +1,10 @@
-<li>
-    <a href="{% if node.item.named_url %}{% url node.item.named_url %}{% else %}{{ node.item.url }}{% endif %}"
-       class="{% if node.item.named_url == current_url %}active{% endif %}">
+<li class="nav-item">
+    <a class="nav-link {% if node.item.named_url == current_url %}active{% endif %}"
+       href="{% if node.item.named_url %}{% url node.item.named_url %}{% else %}{{ node.item.url }}{% endif %}">
         {{ node.item.name }}
     </a>
     {% if node.children %}
-        <ul>
+        <ul class="nav flex-column ml-3">
             {% for child in node.children %}
                 {% include 'menu/menu_item.html' with node=child current_url=current_url %}
             {% endfor %}

@@ -1,4 +1,4 @@
-<ul>
+<ul class="nav flex-column">
     {% for node in menu_tree %}
         {% include 'menu/menu_item.html' with node=node current_url=current_url %}
     {% endfor %}

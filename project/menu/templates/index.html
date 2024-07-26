@@ -1,13 +1,13 @@
+{% extends "base.html" %}
+
 {% load menu_tags %}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Menu Test</title>
-</head>
-<body>
-    <h1>Main Page</h1>
-    {% load menu_tags %}
+{% block title %}Main Page{% endblock %}
+
+{% block content %}
+<h1>Main Page</h1>
+{% load menu_tags %}
+<nav>
     {% draw_menu 'main_menu' %}
-</body>
-</html>
+</nav>
+{% endblock %}
